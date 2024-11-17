@@ -1,8 +1,12 @@
 import classes from './page.module.css'
 import Link from "next/link";
 import MealsGrid from "@/components/meals/meals-grid";
+import db from "better-sqlite3/lib/database";
+import {getMeals} from "@/lib/meal";
 
-export default function MealsPage() {
+export default async function MealsPage() {
+    const meals = await getMeals();
+
     return <>
         <header className={classes.header}>
             <h1>
@@ -17,7 +21,7 @@ export default function MealsPage() {
             </p>
         </header>
         <main className={classes.main}>
-            <MealsGrid meals={[]} />
+            <MealsGrid meals={meals} />
         </main>
     </>;
 
